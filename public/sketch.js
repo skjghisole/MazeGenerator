@@ -1,12 +1,8 @@
 function setup() {
-	let canvas = createCanvas(window.screen.width, window.screen.height)
+	let canvas = createCanvas(window.screen.width-200, window.screen.height-200)
 	canvas.parent('root')
-	// background(102);
 }
 
 function draw() {
-	if (mouseIsPressed) {
-		stroke(0)
-		line(mouseX, mouseY, pmouseX, pmouseY)
-	}
+	// background(0)
 }

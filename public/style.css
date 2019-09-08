@@ -1,7 +1,17 @@
 .container {
-	background-color: color(220, 220, 220);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
 }
 
-.root {
+.controls {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: row;
+}
 
+.canvas {
+	background: rgb(220, 220, 220);
 }
