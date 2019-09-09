@@ -96,7 +96,3 @@ Cell.prototype.highlight = function (color) {
 	rect(x, y, w, h)
 }
 
-
-function generateRandomNumber() {
-	return Math.floor(Math.random() * 10) + 1
-}

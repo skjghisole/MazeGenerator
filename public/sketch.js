@@ -19,6 +19,18 @@ document.getElementById('reset-btn').addEventListener('click', function() {
 	setup()
 })
 
+document.getElementById('set-random-start-btn').addEventListener('click', function() {
+	console.log('clicked')
+	if (startDraw == false && cellGrid.length > 0) {
+		current = cellGrid[generateRandomNumber(rows)][generateRandomNumber(cols)]
+		setup()
+	}
+})
+
+function generateRandomNumber(x = 10) {
+	return Math.floor(Math.random() * x) + 1
+}
+
 function generateCellGrid(grid) {
 	let cellGrid = Object.assign([], grid)
 	for (let i = 0; i < grid.length; i++) {
@@ -40,7 +52,6 @@ function generateGrid(x, y) {
 
 
 function setup() {
-	background(0)
 	let canvas = createCanvas(window.screen.width, window.screen.height)
 	canvas.parent('root')
 	// frameRate(5)
@@ -50,7 +61,9 @@ function setup() {
 
 	grid = generateGrid(rows, cols)
 	cellGrid = generateCellGrid(grid)
-	current = cellGrid[0][0]
+	if (!current) {
+		current = cellGrid[0][0]
+	}
 	current.visited = true
 	revisitStack.push(current)
 
@@ -63,6 +76,8 @@ function setup() {
 }
 
 function draw() {
+	background(0)
+	current.highlight(color(0, 255, 0))
 	if (!startDraw) {
 		return
 	}
