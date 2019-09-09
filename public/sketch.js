@@ -11,6 +11,14 @@ document.getElementById('start-btn').addEventListener('click', function() {
 	startDraw = true
 })
 
+document.getElementById('reset-btn').addEventListener('click', function() {
+	current = undefined
+	stack = []
+	revisitStack = []
+	startDraw = false
+	setup()
+})
+
 function generateCellGrid(grid) {
 	let cellGrid = Object.assign([], grid)
 	for (let i = 0; i < grid.length; i++) {
