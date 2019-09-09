@@ -3,6 +3,7 @@ function Cell(i, j) {
 	this.j = j
 	this.walls = [true, true, true, true]
 	this.visited = false
+	this.revisited = false
 }
 
 Cell.prototype.randomizeWalls = function () {
@@ -36,7 +37,7 @@ Cell.prototype.removeWall = function(current) {
 }
 
 Cell.prototype.show = function () {
-	const { i, j, walls, visited } = this
+	const { i, j, walls, visited, revisited } = this
 	const x = i * w
 	const y = j * h
 	const [top, right, bottom, left] = walls
@@ -49,7 +50,12 @@ Cell.prototype.show = function () {
 	// line(x+w,y,x+w,y+h)
 	// line(x+w,y+w,x,y+w)
 	// line(x, y+w,x, y)
-	if (visited) {
+	// 
+	if (revisited) {
+		noStroke()
+		fill(255, 0, 255)
+		rect(x, y, w, h)
+	}else if (visited) {
 		noStroke()
 		fill(255)
 		rect(x, y, w, h)
@@ -81,12 +87,12 @@ Cell.prototype.checkNeighbors = function(grid) {
 	return randomNeighbor
 }
 
-Cell.prototype.highlight = function () {
+Cell.prototype.highlight = function (color) {
 	const { i, j } = this
 	const x = i * w
 	const y = j * h
 	noStroke()
-	fill(0, 255, 0)
+	fill(color)
 	rect(x, y, w, h)
 }
 

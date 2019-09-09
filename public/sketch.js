@@ -3,6 +3,8 @@ let rows = 25
 let w, h
 let grid, cellGrid
 let current
+let stack = []
+let revisitStack = []
 
 function generateCellGrid(grid) {
 	let cellGrid = Object.assign([], grid)
@@ -27,7 +29,7 @@ function generateGrid(x, y) {
 function setup() {
 	let canvas = createCanvas(window.screen.width, window.screen.height)
 	canvas.parent('root')
-	frameRate(5)
+	// frameRate(5)
 
 	w = Math.floor(width / rows)
 	h = Math.floor(height / cols)
@@ -37,25 +39,37 @@ function setup() {
 
 	current = cellGrid[0][0]
 	current.visited = true
+	revisitStack.push(current)
 }
 
 function draw() {
-	// background(0)
+	background(0)
 	for (let i = 0; i < cellGrid.length; i++) {
 		for (let j = 0; j < cellGrid[i].length; j++) {
 			cellGrid[i][j].show()
 		}
 	}
-	current.highlight()
+	current.highlight(color(0, 255, 0))
 	const neighbor = current.checkNeighbors(cellGrid)
 	if (neighbor) {
 		//step 2
-		//
-		
-		
+		stack.push(current)
 		neighbor.removeWall(current)
 		neighbor.visited = true
+		revisitStack.push(neighbor)
 		current = neighbor
+	} else if (stack.length > 0) {
+		const popped = stack.pop()
+		revisitStack.push(popped)
+		popped.revisited = true
+		current = popped
+	} else if (revisitStack.length > 0) {
+		const popped = revisitStack.pop()
+		popped.revisited = true
+		current = popped
+	} else {
+		alert('Maze Finished')
+		noLoop()
 	}
 
 }
