@@ -5,6 +5,11 @@ let grid, cellGrid
 let current
 let stack = []
 let revisitStack = []
+let startDraw = false;
+
+document.getElementById('start-btn').addEventListener('click', function() {
+	startDraw = true
+})
 
 function generateCellGrid(grid) {
 	let cellGrid = Object.assign([], grid)
@@ -27,6 +32,7 @@ function generateGrid(x, y) {
 
 
 function setup() {
+	background(0)
 	let canvas = createCanvas(window.screen.width, window.screen.height)
 	canvas.parent('root')
 	// frameRate(5)
@@ -36,14 +42,22 @@ function setup() {
 
 	grid = generateGrid(rows, cols)
 	cellGrid = generateCellGrid(grid)
-
 	current = cellGrid[0][0]
 	current.visited = true
 	revisitStack.push(current)
+
+	for (let i = 0; i < cellGrid.length; i++) {
+		for (let j = 0; j < cellGrid[i].length; j++) {
+			cellGrid[i][j].show()
+		}
+	}
+	current.highlight(color(0, 255, 0))
 }
 
 function draw() {
-	background(0)
+	if (!startDraw) {
+		return
+	}
 	for (let i = 0; i < cellGrid.length; i++) {
 		for (let j = 0; j < cellGrid[i].length; j++) {
 			cellGrid[i][j].show()
