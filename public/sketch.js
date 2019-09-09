@@ -1,5 +1,5 @@
-let cols = 25
-let rows = 25
+let cols = 15
+let rows = 15
 let w, h
 let grid, cellGrid
 let current
@@ -22,7 +22,7 @@ document.getElementById('reset-btn').addEventListener('click', function() {
 document.getElementById('set-random-start-btn').addEventListener('click', function() {
 	console.log('clicked')
 	if (startDraw == false && cellGrid.length > 0) {
-		current = cellGrid[generateRandomNumber(rows)][generateRandomNumber(cols)]
+		current = cellGrid[generateRandomNumber(rows - 1)][generateRandomNumber(cols - 1)]
 		setup()
 	}
 })
