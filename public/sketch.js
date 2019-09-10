@@ -53,7 +53,7 @@ function generateGrid(x, y) {
 
 
 function setup() {
-	let canvas = createCanvas(window.screen.width - 200, window.screen.height - 200)
+	let canvas = createCanvas(window.screen.width, window.screen.height - 200)
 	canvas.parent('root')
 	// frameRate(10)
 
