@@ -1,5 +1,5 @@
-let cols = 15
-let rows = 15
+let cols = 25
+let rows = 25
 let w, h
 let grid, cellGrid
 let current
@@ -17,6 +17,7 @@ document.getElementById('reset-btn').addEventListener('click', function() {
 	revisitStack = []
 	startDraw = false
 	setup()
+	loop()
 })
 
 document.getElementById('set-random-start-btn').addEventListener('click', function() {
@@ -52,9 +53,9 @@ function generateGrid(x, y) {
 
 
 function setup() {
-	let canvas = createCanvas(window.screen.width, window.screen.height)
+	let canvas = createCanvas(window.screen.width - 200, window.screen.height - 200)
 	canvas.parent('root')
-	// frameRate(5)
+	// frameRate(10)
 
 	w = Math.floor(width / rows)
 	h = Math.floor(height / cols)
@@ -65,7 +66,6 @@ function setup() {
 		current = cellGrid[0][0]
 	}
 	current.visited = true
-	revisitStack.push(current)
 
 	for (let i = 0; i < cellGrid.length; i++) {
 		for (let j = 0; j < cellGrid[i].length; j++) {
@@ -97,13 +97,14 @@ function draw() {
 		current = neighbor
 	} else if (stack.length > 0) {
 		const popped = stack.pop()
-		revisitStack.push(popped)
-		popped.revisited = true
-		current = popped
-	} else if (revisitStack.length > 0) {
-		const popped = revisitStack.pop()
-		popped.revisited = true
-		current = popped
+		if (revisitStack.length > 0) {
+			const revisitedPopped = revisitStack.pop()
+			revisitedPopped.revisited = true
+			current = popped
+		} else {
+			revisitStack.push(popped)
+			current = popped
+		} 
 	} else {
 		alert('Maze Finished')
 		startDraw = false
