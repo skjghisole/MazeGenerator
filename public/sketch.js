@@ -106,6 +106,7 @@ function draw() {
 		current = popped
 	} else {
 		alert('Maze Finished')
+		startDraw = false
 		noLoop()
 	}
 
