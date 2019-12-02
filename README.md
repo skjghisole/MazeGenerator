@@ -11,3 +11,6 @@
   4. HTML
   5. Javascript
 
+## Test it out!
+http://skjghisole-maze-generator-algo.herokuapp.com/
+
