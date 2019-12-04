@@ -11,6 +11,15 @@
   4. HTML
   5. Javascript
 
+## What's inside? 🤔
+    .
+    ├── public
+    ├── src
+    ├── .gitignore
+    ├── package-lock.json
+    ├── package.json
+    └── README.md
+
 ## Test it out!
 http://skjghisole-maze-generator-algo.herokuapp.com/
 
